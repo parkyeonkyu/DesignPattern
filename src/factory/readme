@@ -1,0 +1,47 @@
+
+장점 : Factory Method패턴의 가장 큰 장점은 지금까지 본것처럼 수정에 닫혀있고 확장에는 열려있는 OCP원칙을 지킬 수 있다
+단점 : 간단한 기능을 사용할 때보다 많은 클래스를 정의해야 하기 때문에 코드량이 증가한다.
+객체를 생성하는 코드를 많이 사용하는데 공통적인 부분은 있지만 또 성격에 따라 다른 유형에 객체를 생성하기 원할 때 사용하는 패턴이다.
+
+
+여러 가지 타입의 클래스를 만들때 유용하게쓰인다
+
+Pizza pizza = simplePizzaFactory.createPizza(type);
+
+
+//interface선언, 각상속받은 피자에서 구현
+//abstract class에구현 필요시 각피자에서 overriding
+pizza.prepare();
+pizza.bake();
+pizza.cut();
+pizza.box();
+return pizza;
+
+ public class SimplePizzaFactory {	
+
+	public Pizza createPizza(String type){ //이런 경우에는 static메소드로 선언하는 경우가 종종 있음.
+
+		Pizza pizza = null;
+		
+		switch(type){
+			case "cheese":
+				pizza = new CheesePizza();
+				break;
+			case "pepper":
+				pizza = new PepperoniPizza();
+				break;
+			case "clam":
+				pizza = new ClamPizza();
+				break;
+			case "veggie":
+				pizza = new VeggiePizza();
+				break;
+			default
+				throw new RuntimeException();	
+		}
+
+		return pizza;
+
+	}
+
+ }
